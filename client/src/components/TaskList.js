@@ -14,7 +14,7 @@ function TaskList() {
 	const {logout} = useLogout()
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/tasks?page=${currentPage}&sortBy=${sortBy}`)
+		fetch(`https://todo-r9sb.onrender.com/tasks?page=${currentPage}&sortBy=${sortBy}`)
 			.then((response) => response.json())
 			.then((data) => {
 				dispatch({type: 'SET_TASKS', payload: data});

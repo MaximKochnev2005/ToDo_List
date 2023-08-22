@@ -39,7 +39,7 @@ function TaskForm() {
 				text,
 			};
 
-			fetch('http://localhost:4000/tasks', {
+			fetch('https://todo-r9sb.onrender.com/tasks', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

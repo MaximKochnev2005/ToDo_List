@@ -15,7 +15,7 @@ function TaskItem({ task }) {
 
 	const handleSaveClick = async () => {
 		try {
-			const response = await fetch(`http://localhost:4000/tasks/${task.id}`, {
+			const response = await fetch(`https://todo-r9sb.onrender.com/tasks/${task.id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function TaskItem({ task }) {
 
 	const handleCompleteClick = async () => {
 		try {
-			const response = await fetch(`http://localhost:4000/tasks/${task.id}`, {
+			const response = await fetch(`https://todo-r9sb.onrender.com/tasks/${task.id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
