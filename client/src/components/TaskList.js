@@ -10,17 +10,18 @@ function TaskList() {
 	const {tasks, dispatch} = useTasksContext();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [sortBy, setSortBy] = useState('user_name');
+	const [sortOrder, setSortOrder] = useState('asc');
 	const {user} = useAuthContext()
 	const {logout} = useLogout()
 
 	useEffect(() => {
-		fetch(`https://todo-r9sb.onrender.com/tasks?page=${currentPage}&sortBy=${sortBy}`)
+		fetch(`https://todo-r9sb.onrender.com/tasks?page=${currentPage}&sortBy=${sortBy}&sortOrder=${sortOrder}`)
 			.then((response) => response.json())
 			.then((data) => {
 				dispatch({type: 'SET_TASKS', payload: data});
 			})
 			.catch((error) => console.error('Error fetching tasks', error));
-	}, [currentPage, sortBy]);
+	}, [currentPage, sortBy, sortOrder]);
 
 	const handlePageChange = (newPage) => {
 		if (newPage >= 1) {
@@ -42,6 +43,7 @@ function TaskList() {
 					<option value="email">Email</option>
 					<option value="status">Status</option>
 				</select>
+				<span onClick={() => {setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}}>{sortOrder === 'asc' ? '↑' : '↓'}</span>
 			</div>
 			<ul>
 				{tasks?.map((task) => (

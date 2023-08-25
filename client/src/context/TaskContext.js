@@ -9,8 +9,10 @@ export const tasksReducer = (state, action) => {
 				tasks: action.payload
 			}
 		case 'CREATE_TASK':
-			return {
-				tasks: [...state.tasks, action.payload]
+			if (state.tasks.length < 3) {
+				return {
+					tasks: [...state.tasks, action.payload]
+				}
 			}
 		default:
 			return state
