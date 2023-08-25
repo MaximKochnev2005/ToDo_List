@@ -64,11 +64,14 @@ function TaskItem({ task }) {
 			{isEditing ? (
 				<textarea value={editedText} onChange={(e) => setEditedText(e.target.value)} />
 			) : (
-				<p>{task.text}</p>
+				<div>
+					<p>{task.text}</p>
+				</div>
 			)}
 			<p>Email: {task.email}</p>
 			<p>Status: {task.status ? 'Completed' : 'Pending'}</p>
-			{!task.status && (
+			{task.ischanged && <p className="edited-by-admin">Отредактировано администратором</p>}
+			{user && (
 				<div className="edit-buttons">
 					<button onClick={handleEditClick}>Edit</button>
 					{isEditing && <button className="save-button" onClick={handleSaveClick}>Save</button>}
