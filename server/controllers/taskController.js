@@ -7,7 +7,7 @@ const getTasks = async (req, res) => {
 
 	try {
 		const query = `
-      SELECT id, user_name, email, text, status
+      SELECT id, user_name, email, text, status, isChanged
       FROM tasks
       ORDER BY ${sortBy} ${sortOrder}
       LIMIT ${itemsPerPage}
