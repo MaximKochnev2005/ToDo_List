@@ -42,8 +42,17 @@ const updateTask = async (req, res) => {
 	const { text, status } = req.body;
 
 	try {
-		const query = 'UPDATE tasks SET text = $1, status = $2 WHERE id = $3';
-		await pool.query(query, [text, status, id]);
+		const currentTaskQuery = 'SELECT text FROM tasks WHERE id = $1';
+		const currentTaskResult = await pool.query(currentTaskQuery, [id]);
+		const currentText = currentTaskResult.rows[0].text;
+
+		const updateQuery = 'UPDATE tasks SET text = $1, status = $2 WHERE id = $3';
+		await pool.query(updateQuery, [text, status, id]);
+
+		if (currentText !== text) {
+			const updateIsChangedQuery = 'UPDATE tasks SET isChanged = true WHERE id = $1';
+			await pool.query(updateIsChangedQuery, [id]);
+		}
 
 		res.json({ message: 'Task updated successfully' });
 	} catch (error) {
